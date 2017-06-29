@@ -25,10 +25,9 @@ mkdir -p $secret_dir
 mkdir -p $buildpack_root
 mkdir -p $build_root/.profile.d
 
-if ! [[ -z "${TAR_PATH}" ]]; then
-	get_object
-	tar -xzf /tmp/slug.tgz -C /app/
-	unset TAR_PATH
+if ! [[ -z "${REPO_PATH}" ]]; then
+	git clone ${REPO_PATH} /app
+	ls /app/
 fi
 
 if [[ "$1" == "-" ]]; then
@@ -250,8 +249,4 @@ fi
 if [[ "$slug_file" != "-" ]]; then
     slug_size=$(du -Sh "$slug_file" | cut -f1)
     echo_title "Compiled slug size is $slug_size"
-
-    if [[ $PUT_PATH ]]; then
-			put_object
-		fi
 fi

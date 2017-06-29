@@ -28,8 +28,8 @@ build:
 	@echo Nothing to do.
 
 docker-build:
-	docker build ${DOCKER_BUILD_FLAGS} -t ${IMAGE} rootfs
-	docker tag ${IMAGE} ${MUTABLE_IMAGE}
+	docker build  -t smothiki/slugrunner:repo rootfs
+	# docker tag ${IMAGE} ${MUTABLE_IMAGE}
 
 deploy: docker-build docker-push
 
